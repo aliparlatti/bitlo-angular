@@ -1,0 +1,13 @@
+<div class="flex-column">
+  <h1 class="my-2">{{market.marketCode}}</h1>
+  <ul>
+    <li>marketCode: {{ market.marketCode}}</li>
+    <li>currentQuote: {{ market.currentQuote |number:'1.2-2'}}</li>
+    <li>change24h: {{ market.change24h |number:'1.2-2'}}</li>
+    <li >change24hPercent: <span [ngStyle]="{ color: market.change24hPercent < 0 ? 'red' : market.change24hPercent > 0 ? 'green' : 'black' }">{{market.change24hPercent}}</span></li>
+    <li>highestQuote24h: {{ market.highestQuote24h|number:'1.2-2' }}</li>
+    <li>lowestQuote24h: {{ market.lowestQuote24h |number:'1.2-2'}}</li>
+    <li>weightedAverage24h: {{ market.weightedAverage24h |number:'1.2-2'}}</li>
+  </ul>
+<img src="https://static.bitlo.com/cryptologossvg/{{imgCode}}.svg" width="50" height="50" />
+</div>
