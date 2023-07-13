@@ -1,7 +1,9 @@
-<!-- Image and text -->
 <nav class="navbar">
-
-  <a class="navbar-brand" href="#">
-    <img ngSrc="../src/assets/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-  </a>
+  <div class="container">
+      <div class="d-flex justify-content-between w-100">
+        <a href="/"><img class="logo" ngSrc="assets/logo.png" priority="true" width=420 height=150></a>
+        <a *ngIf="!authService.isLoggedIn" class="navbar-brand" href="/login">Login</a>
+        <a *ngIf="authService.isLoggedIn" class="navbar-brand" href="/logout">Çıkış Yap</a>
+      </div>
+    </div>
 </nav>
