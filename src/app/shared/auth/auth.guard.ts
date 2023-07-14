@@ -5,7 +5,7 @@ import {
   Router,
   UrlTree,
 } from '@angular/router';
-import {AuthService} from "../service/auth.service";
+import { AuthService } from '../service/auth.service';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,9 @@ export class AuthGuard {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
     if (!this.authService.isLoggedIn) {
-      window.alert('Sadece giriş yapmış kullanıcılar bu alanı görüntüleyebilir!');
+      window.alert(
+        'Sadece giriş yapmış kullanıcılar bu alanı görüntüleyebilir!'
+      );
       this.router.navigate(['login']);
     }
     return true;

@@ -1,33 +1,40 @@
 <div class="row justify-content-center">
-<div class="col-md-6">
-      <div class=" flex-column ">
-        <h1 class="my-2">Bakiyeler</h1>
-        <div class="form-check">
-          <input class="form-check-input"  [(ngModel)]="checkBoxControl" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Düşük Bakiyeleri Göster / Gizle
-          </label>
-        </div>
-
-        <table class="table mt-4 table-bordered rounded-5">
-            <thead>
-            <tr>
-              <th>Asset Code</th>
-              <th>Available Amount</th>
-              <th>Available Amount TRY Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let balance of balances">
-              <ng-container *ngIf="balance.availableAmountTRYValue>1 || !checkBoxControl">
-                <td>{{ balance.assetCode }}</td>
-                <td>{{ balance.availableAmount |number:'1.2-2' }}</td>
-                <td>{{ balance.availableAmountTRYValue | number :'1.2-2'  }}</td>
-              </ng-container>
-
-            </tr>
-            </tbody>
-        </table>
+  <div class="col-md-6">
+    <div class="flex-column">
+      <h1 class="my-2">Bakiyeler</h1>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          [(ngModel)]="checkBoxControl"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label" for="flexCheckDefault">
+          Düşük Bakiyeleri Göster / Gizle
+        </label>
       </div>
+
+      <table class="table mt-4 table-bordered rounded-5">
+        <thead>
+          <tr>
+            <th>Asset Code</th>
+            <th>Available Amount</th>
+            <th>Available Amount TRY Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let balance of balances">
+            <ng-container
+              *ngIf="balance.availableAmountTRYValue > 1 || !checkBoxControl"
+            >
+              <td>{{ balance.assetCode }}</td>
+              <td>{{ balance.availableAmount | number : "1.2-2" }}</td>
+              <td>{{ balance.availableAmountTRYValue | number : "1.2-2" }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

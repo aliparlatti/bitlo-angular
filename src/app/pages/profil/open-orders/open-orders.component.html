@@ -1,33 +1,38 @@
 <div class="row justify-content-center">
-<div class="col-md-8">
-    <div class=" flex-column ">
-        <h1 class="my-2">Açık Emirler</h1>
-        <div class="table-responsive ">
-        <table class="table  mt-4 table-bordered rounded-5">
+  <div class="col-md-8">
+    <div class="flex-column">
+      <h1 class="my-2">Açık Emirler</h1>
+      <div class="table-responsive">
+        <table class="table mt-4 table-bordered rounded-5">
           <thead>
-          <tr>
-            <th>marketCode</th>
-            <th>orderSide</th>
-            <th>orderDate</th>
-            <th>price</th>
-            <th>orderAmount</th>
-            <th>fillAmount</th>
-            <th>Fill percent</th>
-          </tr>
+            <tr>
+              <th>marketCode</th>
+              <th>orderSide</th>
+              <th>orderDate</th>
+              <th>price</th>
+              <th>orderAmount</th>
+              <th>fillAmount</th>
+              <th>Fill percent</th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let order of openOrders">
-            <td>{{ order.marketCode }}</td>
-            <td>{{ order.orderSide }}</td>
-            <td>{{ order.orderDate }}</td>
-            <td>{{ order.price | number:'1.2-2' }}</td>
-            <td>{{ order.orderAmount | number:'1.2-2'}}</td>
-            <td>{{ order.fillAmount | number:'1.2-2'}}</td>
-            <td>%{{ (order.fillAmount/ order.orderAmount)*100 |number:'1.2-2' }}</td>
-          </tr>
+            <tr *ngFor="let order of openOrders">
+              <td>{{ order.marketCode }}</td>
+              <td>{{ order.orderSide }}</td>
+              <td>{{ order.orderDate }}</td>
+              <td>{{ order.price | number : "1.2-2" }}</td>
+              <td>{{ order.orderAmount | number : "1.2-2" }}</td>
+              <td>{{ order.fillAmount | number : "1.2-2" }}</td>
+              <td>
+                %{{
+                  (order.fillAmount / order.orderAmount) * 100
+                    | number : "1.2-2"
+                }}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
-      </div>
     </div>
+  </div>
 </div>

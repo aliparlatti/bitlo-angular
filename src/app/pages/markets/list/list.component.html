@@ -1,45 +1,85 @@
-
-      <div class=" flex-column ">
-        <h1 class="my-2">Marketler</h1>
-        <input class="form-control" type="text" [(ngModel)]="filterValue" (input)="filterMarkets()" placeholder="Arama">
-        <div class="d-flex justify-content-center mt-5"  *ngIf="filteredMarkets.length <= 0">
-          <small class="text-danger">Aramanız ile eşleşen sonuç bulunamadı</small>
-        </div>
-        <div *ngIf="filteredMarkets.length > 0" class="table-responsive">
-          <table class="table  mt-4 table-bordered rounded-5">
-            <thead>
-            <tr>
-              <th>Sıra</th>
-              <th>Market Code</th>
-              <th>Current Quote</th>
-              <th>Change 24h</th>
-              <th>Change 24h Percent</th>
-              <th>Highest Quote 24h</th>
-              <th>Lowest Quote 24h</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let market of filteredMarkets;let i=index">
-              <td>{{ i+1 }}</td>
-              <td><a [routerLink]="['/marketler', market.marketCode.toLowerCase()]" [state]="market">{{ market.marketCode }}</a></td>
-              <td>{{ market.currentQuote |number:'1.2-2'}}</td>
-              <td>{{ market.change24h |number:'1.2-2' }}</td>
-              <td [ngStyle]="{ color: market.change24hPercent < 0 ? 'red' : market.change24hPercent > 0 ? 'green' : 'black' }">{{ market.change24hPercent |number:'1.2-2' }}</td>
-              <td>{{ market.highestQuote24h |number:'1.2-2' }}</td>
-              <td>{{ market.lowestQuote24h |number:'1.2-2' }}</td>
-            </tr>
-            </tbody>
-          </table>
-          <ul >
-            <li *ngIf="positiveCount>0">Bugün {{ positiveCount}} adet marketin fiyat değişim yüzdesi pozitif olmuştur.</li>
-            <li *ngIf="positiveMarket.change24hPercent>0">Bugün en fazla artış gösteren market {{positiveMarket.marketCode}} marketi olmuştur.</li>
-            <li *ngIf="negativeMarket.change24hPercent<0"> Bugün en fazla değer kaybeden market {{negativeMarket.marketCode}} marketi olmuştur</li>
-            <li *ngIf="count10000>0">Fiyatı 10,000 TRY üzerinde olan toplam {{count10000}} adet market vardır. </li>
-            <li *ngIf="count1>0">Fiyatı 1.00 TRY’den daha az olan toplam {{count1}} adet market vardır.</li>
-            <li>Tüm marketlerdeki fiyatların toplamının aritmetik ortalaması {{arithmeticMean |number:'1.2-2'}} TRY dir. </li>
-            <li>1 BTC = {{btcPrice|number:'1.2-2' }} ABD dolarıdır. </li>
-          </ul>
-        </div>
-      </div>
-
-
+<div class="flex-column">
+  <h1 class="my-2">Marketler</h1>
+  <input
+    class="form-control"
+    type="text"
+    [(ngModel)]="filterValue"
+    (input)="filterMarkets()"
+    placeholder="Arama"
+  />
+  <div
+    class="d-flex justify-content-center mt-5"
+    *ngIf="filteredMarkets.length <= 0"
+  >
+    <small class="text-danger">Aramanız ile eşleşen sonuç bulunamadı</small>
+  </div>
+  <div *ngIf="filteredMarkets.length > 0" class="table-responsive">
+    <table class="table mt-4 table-bordered rounded-5">
+      <thead>
+        <tr>
+          <th>Sıra</th>
+          <th>Market Code</th>
+          <th>Current Quote</th>
+          <th>Change 24h</th>
+          <th>Change 24h Percent</th>
+          <th>Highest Quote 24h</th>
+          <th>Lowest Quote 24h</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let market of filteredMarkets; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <a
+              [routerLink]="['/marketler', market.marketCode.toLowerCase()]"
+              [state]="market"
+              >{{ market.marketCode }}</a
+            >
+          </td>
+          <td>{{ market.currentQuote | number : "1.2-2" }}</td>
+          <td>{{ market.change24h | number : "1.2-2" }}</td>
+          <td
+            [ngStyle]="{
+              color:
+                market.change24hPercent < 0
+                  ? 'red'
+                  : market.change24hPercent > 0
+                  ? 'green'
+                  : 'black'
+            }"
+          >
+            {{ market.change24hPercent | number : "1.2-2" }}
+          </td>
+          <td>{{ market.highestQuote24h | number : "1.2-2" }}</td>
+          <td>{{ market.lowestQuote24h | number : "1.2-2" }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li *ngIf="positiveCount > 0">
+        Bugün {{ positiveCount }} adet marketin fiyat değişim yüzdesi pozitif
+        olmuştur.
+      </li>
+      <li *ngIf="positiveMarket.change24hPercent > 0">
+        Bugün en fazla artış gösteren market
+        {{ positiveMarket.marketCode }} marketi olmuştur.
+      </li>
+      <li *ngIf="negativeMarket.change24hPercent < 0">
+        Bugün en fazla değer kaybeden market
+        {{ negativeMarket.marketCode }} marketi olmuştur
+      </li>
+      <li *ngIf="count10000 > 0">
+        Fiyatı 10,000 TRY üzerinde olan toplam {{ count10000 }} adet market
+        vardır.
+      </li>
+      <li *ngIf="count1 > 0">
+        Fiyatı 1.00 TRY’den daha az olan toplam {{ count1 }} adet market vardır.
+      </li>
+      <li>
+        Tüm marketlerdeki fiyatların toplamının aritmetik ortalaması
+        {{ arithmeticMean | number : "1.2-2" }} TRY dir.
+      </li>
+      <li>1 BTC = {{ btcPrice | number : "1.2-2" }} ABD dolarıdır.</li>
+    </ul>
+  </div>
+</div>

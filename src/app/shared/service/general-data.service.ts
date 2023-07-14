@@ -1,38 +1,38 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Market, Response} from "../../models/general.model";
-import {environment} from "../../../environments/environment";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Market, Response } from '../../models/general.model';
+import { environment } from '../../../environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GeneralDataService {
-
   httpOptions = {
-    headers: new HttpHeaders({ 'x-bitlo-auth': window.sessionStorage.getItem(environment.TOKEN_KEY) || '', })
+    headers: new HttpHeaders({
+      'x-bitlo-auth':
+        window.sessionStorage.getItem(environment.TOKEN_KEY) || '',
+    }),
   };
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getBalances():Observable<Response>{
+  getBalances(): Observable<Response> {
     return this.http.post<Response>(
       environment.API + 'auth/balances',
       {},
       this.httpOptions
     );
   }
-  getOpenOrders():Observable<Response>{
+  getOpenOrders(): Observable<Response> {
     return this.http.post<Response>(
       environment.API + 'auth/open-orders',
       {},
       this.httpOptions
     );
   }
-  getMarkets():Observable<Market[]>{
-    return this.http.get<Market[]>(
-      environment.API + 'markets',
-    );
+  getMarkets(): Observable<Market[]> {
+    return this.http.get<Market[]>(environment.API + 'markets');
   }
-  getUserData():Observable<Response>{
+  getUserData(): Observable<Response> {
     return this.http.post<Response>(
       environment.API + 'auth/me',
       {},

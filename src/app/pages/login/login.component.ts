@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit{
   loginForm:FormGroup;
   submitted:boolean=false;
   isSignUpFailed = false;
+  failedMessage:string='';
   constructor( private fb:FormBuilder,
                private authService:AuthService,
                private router:Router
@@ -34,22 +35,28 @@ export class LoginComponent implements OnInit{
   }
   login():void{
     this.submitted=true;
-    if(!this.loginForm.invalid){
-      this.authService.login(this.f["email"].value,this.f["password"].value).subscribe({
-        next: data => {
-          this.isSignUpFailed=false;
-          this.authService.saveUserStorage(data["token"])
-          this.router.navigate(['profil']);
+    if(!this.f["email"].value || !this.f["password"].value){
+      this.failedMessage="Lütfen gerekli alanları doldurunuz!"
+      this.isSignUpFailed=true;
+      console.log("aaa")
+    }else{
+      if(!this.loginForm.invalid){
+        this.authService.login(this.f["email"].value,this.f["password"].value).subscribe({
+          next: data => {
+            this.isSignUpFailed=false;
+            this.failedMessage="";
+            this.authService.saveUserStorage(data["token"])
+            this.router.navigate(['profil']);
           },
-        error:e =>{
-          console.log(e)
-          this.isSignUpFailed=true
-        }
-      });
-
-    }else {
-      return
+          error:e =>{
+            console.log(e)
+            this.failedMessage="Kullanıcı adı ya da parola yanlış!"
+            this.isSignUpFailed=true
+          }
+        });
+      }else {
+        return
+      }
     }
-
   }
 }
